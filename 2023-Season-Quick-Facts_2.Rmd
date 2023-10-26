@@ -273,83 +273,100 @@ plotly:: ggplotly(percent_plot, tooltip = c("label1", "label2"))
 
 ##install.packages("downloadthis")
 ##remotes::install_github("fmmattioni/downloadthis")
-##library(downloadthis)
+library(downloadthis)
+library(readxl)
 
-##list(dt) %>%
-##  download_this(
-##    output_name = "2023 Long Island Sound Hypoxia Season Cruise Information dataset",
-##    output_extension = ".xlsx",
-##    button_label = "Download Cruise Info as xlsx",
-##    button_type = "warning",
-##    has_icon = TRUE,
-##    icon = "fa fa-save"
-##  )
+dt <- read_excel("C:\\R\\Data\\CruiseInfoTable2023.xlsx")
+
+list(dt) %>%
+    download_this(
+    output_name = "2023 Long Island Sound Hypoxia Season Cruise Information dataset",
+    output_extension = ".xlsx",
+    button_label = "Download Cruise Info as xlsx",
+    button_type = "warning",
+    has_icon = TRUE,
+    icon = "fa fa-save", 
+    self_contained= TRUE
+  )
 ##options(repos = list(CRAN = "http://cran/rstudio.com/"))
 ```
 <brk>
 <brk>
 ```{r}
-##list(MovAvg) %>%
-##  download_this(
-##    output_name = "Maximum Area and Duration of Hypoxia dataset",
-##    output_extension = ".xlsx",
-##    button_label = "Download Maximum Area and Duration as xlsx",
-##    button_type = "warning",
-##    has_icon = TRUE,
-##    icon = "fa fa-save"
-##  )
+MovAvg  <- read_excel("C:\\R\\data\\MovingAverage2023.xlsx")
+
+list(MovAvg) %>%
+  download_this(
+    output_name = "Maximum Area and Duration of Hypoxia dataset",
+    output_extension = ".xlsx",
+    button_label = "Download Maximum Area and Duration as xlsx",
+    button_type = "warning",
+    has_icon = TRUE,
+    icon = "fa fa-save",
+    self_contained= TRUE
+  )
 ```
 <brk>
 <brk>
 ```{r}
-##list(TimDur) %>%
-##  download_this(
-##    output_name = "Timing and Duration of Hypoxia in LIS dataset",
-##    output_extension = ".xlsx",
-##    button_label = "Download Timing and Duration as xlsx",
-##    button_type = "warning",
-##    has_icon = TRUE,
-##    icon = "fa fa-save"
-##  )
+
+TimDur  <- read_excel("C:\\R\\data\\timing and duration.xlsx")
+list(TimDur) %>%
+  download_this(
+    output_name = "Timing and Duration of Hypoxia in LIS dataset",
+    output_extension = ".xlsx",
+    button_label = "Download Timing and Duration as xlsx",
+    button_type = "warning",
+    has_icon = TRUE,
+    icon = "fa fa-save",
+    self_contained=TRUE
+      )
 ```
 <brk>
 <brk>
 ```{r}
-##list(HypoxicVol) %>%
-##  download_this(
-##    output_name = "Volume of LIS Bottom Waters Below 3 mg/L dataset",
-##    output_extension = ".xlsx",
-##    button_label = "Download Volume Below 3 Info as xlsx",
-##    button_type = "warning",
-##    has_icon = TRUE,
-##    icon = "fa fa-save"
-##  )
+
+HypoxicVol <- read_excel("C:\\R\\data\\Hypoxic Volume.xlsx")
+list(HypoxicVol) %>%
+  download_this(
+    output_name = "Volume of LIS Bottom Waters Below 3 mg/L dataset",
+    output_extension = ".xlsx",
+    button_label = "Download Volume Below 3 Info as xlsx",
+    button_type = "warning",
+    has_icon = TRUE,
+    icon = "fa fa-save",
+    self_contained= TRUE
+      )
 ```
 <brk>
 <brk>
 ```{r}
-##list(dt1) %>%
-##  download_this(
-##    output_name = "2023 Long Island Sound Hypoxia Season Volume dataset",
-##    output_extension = ".xlsx",
-##    button_label = "Download 2023 LIS Hypoxic Volume Info as xlsx",
-##    button_type = "warning",
-##    has_icon = TRUE,
-##    icon = "fa fa-save"
- ## )
+
+dt1 <- read_excel("C:\\R\\Data\\2023_hypoxAreaVol.xlsx")
+list(dt1) %>%
+  download_this(
+    output_name = "2023 Long Island Sound Hypoxia Season Volume dataset",
+    output_extension = ".xlsx",
+    button_label = "Download 2023 LIS Hypoxic Volume Info as xlsx",
+    button_type = "warning",
+    has_icon = TRUE,
+    icon = "fa fa-save",
+    self_contained= TRUE )
 ```
 <brk>
 <brk>
 ```{r}
-##list(freq_94_23) %>%
-##  download_this(
-##    output_name = "Frequency of Hypoxia dataset",
-##    output_extension = ".xlsx",
-##    button_label = "Download Frequency of Hypoxia Info as xlsx",
-##    button_type = "warning",
-##    has_icon = TRUE,
-##    icon = "fa fa-save"
-##  )
+
+freq_94_23 <- read_excel("C:\\R\\data\\freq_94_23.xlsx")
+list(freq_94_23) %>%
+  download_this(
+    output_name = "Frequency of Hypoxia dataset",
+    output_extension = ".xlsx",
+    button_label = "Download Frequency of Hypoxia Info as xlsx",
+    button_type = "warning",
+    has_icon = TRUE,
+    icon = "fa fa-save", 
+    self_contained = TRUE)
 ```
 <brk>
 <brk>
