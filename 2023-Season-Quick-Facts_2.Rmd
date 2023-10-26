@@ -1,0 +1,344 @@
+---
+title: "Long Island Sound Water Quality Monitoring Program (LISWQMP)"
+##author: "Katie O'Brien-Clayton"
+##date: "`r Sys.Date()`"
+##output: html_document
+---
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
+```
+```{r, echo=FALSE, out.width="150%"}
+ knitr::include_graphics("C:/R/projects/DEEP webpage image.png")  
+
+options(repos = list(CRAN = "http://cran/rstudio.com/"))
+
+```
+
+# 2023 Hypoxia Season Quick Facts 
+
+
+
+
+## Background {.tabset}
+Hypoxia is a condition of low dissolved oxygen concentrations in the waters of Long Island Sound that impacts up to half of the Sound’s waters each summer.  The primary cause of hypoxia is nitrogen enrichment that comes from a variety of sources throughout the Long Island Sound watershed, in particular sewage treatment plants, stormwater runoff and atmospheric deposition.
+
+Since 1991, the [Connecticut Department of Energy and Environmental Protection (CT DEEP)](https://portal.ct.gov/DEEP/Water/LIS-Monitoring/LIS-Water-Quality-and-Hypoxia-Monitoring-Program-Overview) and the [Interstate Environmental Commission (IEC)](https://www.iec-nynjct.org/programs/water/sound-monitoring) have conducted an intensive water quality monitoring program on Long Island Sound. The program is funded through a grant from the EPA's [Long Island Sound Study](https://longislandsoundstudy.net/). Data from the surveys are used to quantify and identify annual trends and differences in water quality parameters relevant to hypoxia (low dissolved oxygen), especially nutrients, temperature, and chlorophyll. These data are also used to evaluate the effectiveness of the management program to reduce nitrogen concentrations, since nitrogen is a primary contributor to the excessive algae growth that leads to hypoxia in LIS. 
+
+During the summer (June -September), surveys are conducted at bi-weekly intervals to better define the areal extent and duration of hypoxia. During these surveys stations are sampled for in situ parameters including dissolved oxygen, temperature, pH, and salinity. 
+
+The table below provides a summary of the 2023 Hypoxia Season at a glance. Data from all CTDEEP cruises can be downloaded from the [UCONN ERDDAP](http://merlin.dms.uconn.edu:8080/erddap/tabledap/DEEP_WQ.html). All samples are collected and analyzed under EPA-approved Quality Assurance Project Plans.
+
+
+
+```{r}
+
+install.packages("kbleExtra")
+
+library (readxl)
+library (kableExtra)
+
+
+dt <- read_excel("C:\\R\\Data\\CruiseInfoTable2023.xlsx")
+
+dt %>%
+  kbl(caption =  "2023 Long Island Sound Hypoxia Season Cruise Information", align = "c", col.names = c("Cruise", "Start Date", "End Date", "Number of Stations Sampled", "Number of Hypoxic Stations", "Hypoxic Area (mi2)", "Minimum DO", "Station Where Minimum DO Occurred")) %>%
+  kable_classic(full_width = F, html_font = "Cambria") %>%
+  scroll_box(height="300px") 
+  
+```
+
+
+
+*Click on the Tabs to explore more details.*  
+
+
+### **Maximum Hypoxic Area**
+
+**The maximum area of Long Island Sound with bottom water dissolved oxygen (DO) concentrations below 3.0 mg/L was 126.8 sq. mi (328.4 sq. km) and occurred during the WQAUG23 survey conducted 31 July - 3 August 2023.** During this survey four stations had DO concentrations below 2 mg/L, eight stations had concentrations below 3.0 mg/L, and 10 stations had concentrations between 3 and 3.5 mg/L. The lowest dissolved oxygen concentration recorded during the survey was 1.69 mg/L at Station A4.
+
+
+```{r, echo=FALSE, out.width="75%", fig.align = 'center'}
+
+knitr::include_graphics("C:/R/projects/WQAUG23_DO_MAP.jpg")
+
+
+
+```
+
+
+```{r}
+library(ggplot2)
+library (readxl)
+library (plotly)
+
+MovAvg  <- read_excel("C:\\R\\data\\MovingAverage2023.xlsx")
+
+Avg_plot <- ggplot (data=MovAvg)+
+
+  geom_col(aes(x=Year, y=Area), fill="blue")+
+  geom_point(aes (x=Year, y=Duration), color="black")+
+  geom_line(aes(x=Year, y=FiveYearAvg),color="green",size=2)+ 
+  labs(title= "Maximum Area and Duration of Hypoxia", subtitle= "1987-2023 (June-September)")+
+      theme(axis.title = element_blank())
+
+ggplotly(Avg_plot)
+
+```
+Area in square miles, Duration in days
+
+
+
+
+
+
+### **Duration**
+The duration of hypoxia refers to the estimated length of time that hypoxic conditions persist in the bottom waters of Long Island Sound. Duration is estimated based on dissolved oxygen concentration readings taken at three water quality monitoring stations in the Western Sound - A3, A4, and B3.
+
+**The 2023 hypoxic event lasted an estimated 42 days, beginning on July 12, 2023 and ending on August 22, 2023.** 
+
+The earliest onset of hypoxia (based on CT DEEP data only) occurred on June 25, 2002 and the latest end date was September 20, 2005. The average duration over the 33-year time series is 52 days. The longest hypoxic event was 79 days during 2008. The shortest hypoxic event was 26 days in 2017. 
+
+
+
+```{r}
+library(ggplot2)
+library (readxl)
+library (plotly)
+
+TimDur  <- read_excel("C:\\R\\data\\timing and duration.xlsx")
+
+TimDur$TimePer <- factor(TimDur$TimePer, levels = c("Before", 
+    "During", "After"))
+
+Dur_plot <- ggplot(data = TimDur) + 
+    geom_col(aes( x=Year, y=Day.count, fill= TimDur$TimePer, position= 'stack'))+ 
+  ylab('Days')+
+  xlab('Year')+
+  ggtitle('Timing and Duration of Hypoxia in Long Island Sound')+
+    coord_flip()+
+  scale_fill_manual(values =c("blue", "red", "blue"))+
+  theme(plot.title=NULL)+
+labs(fill="")+
+  scale_y_continuous(breaks=seq(0,360,by=25), expand = c(0,0))+
+  scale_x_continuous(breaks=seq(1990,2025,by=5), expand = c(0,0))+
+  theme_minimal()+
+theme(axis.line = element_line(colour = "black"))+
+theme(panel.grid = element_blank())
+
+
+  
+  
+  ggplotly(Dur_plot, tooltip = c("Day.count"), fig.align='center')
+```
+
+
+
+
+
+### **Hypoxic Volume**
+In 2019, CT DEEP and the O'Donnell lab at UCONN Marine Sciences undertook a project to develop a tool to calculate the hypoxic volume of Long Island Sound. The tool is available to the public and allows users to obtain area and volume estimates on the fly from any survey from 1991-present. The tool utilizes CT DEEP and IEC data. It can be accessed from http://merlin.dms.uconn.edu:9988/webapps/home/. 
+
+**The maximum volume of water with concentrations below 3.0 mg/L occurred during the WQXXX23 survey and was XXX km3 (XXX mi2).** 
+
+The interactive graph plots the maximum hypoxic volume over time.
+
+
+
+```{r, echo=FALSE, out.width="75%", fig.align = 'center'}
+pacman::p_load(
+  rio,       # import/export
+  here,      # filepaths
+  lubridate, # working with dates
+  plotly,    # interactive plots
+  scales,    # quick percents
+  tidyverse  # data management and visualization
+  ) 
+
+library (ggplot2)
+
+library (readxl)
+
+
+HypoxicVol <- read_excel("C:\\R\\data\\Hypoxic Volume.xlsx")
+
+Vol_plot <- ggplot (data=HypoxicVol)+
+  geom_line(mapping = aes(x=Year, y=Volume)) +
+              labs(x= "Year", y= "Volume (km^3)", title= "Volume of Long Island Sound Bottom Waters with Dissolved Oxygen Concentrations Below 3.0 mg/L")
+
+Vol_plot %>% plotly::ggplotly(fig.align='center')
+
+
+```
+
+
+
+The table compares hypoxic area and volume by survey over the 2023 season. 
+
+```{r, echo=FALSE, out.width="75%", fig.align = 'center'}
+
+install.packages("kbleExtra")
+
+library (readxl)
+library (kableExtra)
+
+
+dt1 <- read_excel("C:\\R\\Data\\2023_hypoxAreaVol.xlsx")
+
+dt1 %>%
+  kbl(caption =  "2023 Volume Estimates of Hypoxic Long Island Sound Bottom Waters Obtained from the UCONN HypVolApp", align = "c", col.names = c("CRUISE", "2 mg/L", "3 mg/L", "4.8 mg/L", "2 mg/L", "3 mg/L", "4.8 mg/L")) %>%
+  kable_classic(full_width = F, html_font = "Cambria") %>%
+  add_header_above(c(" ", "Area (sq km)" = 3, "Volume (sq km)" = 3))
+
+
+```
+
+
+
+### **Frequency of Hypoxia (1994-2023)**
+This map illustrates how frequently the areas of Long Island Sound experience hypoxia. The colors represent the percentage of years in which hypoxic conditions have occurred in the bottom waters of Long Island Sound. The westernmost areas have experienced hypoxia almost every year since monitoring began. 
+
+The bar graph provides a deeper dive into the data (percentages) used to create the frequency map. The colors of the bars correspond to the map legend. 
+
+```{r, , echo=FALSE, out.width="75%", fig.align = 'center'}
+
+knitr::include_graphics("C:/R/projects/frequency_IEC_DEEP_2023.jpg")
+
+```
+
+
+```{r, echo=FALSE, out.width="75%", fig.align = 'center'}
+
+pacman::p_load(
+  rio,       # import/export
+  here,      # filepaths
+  lubridate, # working with dates
+  plotly,    # interactive plots
+  scales,    # quick percents
+  tidyverse  # data management and visualization
+  ) 
+
+install.packages("viridis")
+install.packages("RTools")
+library (viridis)
+library (plotly)
+library (ggplot2)
+library(readxl)
+
+freq_94_23 <- read_excel("C:\\R\\data\\freq_94_23.xlsx")
+
+Station_Name <- factor (freq_94_23$STATION_NAME, levels = c("A1", "A2M", "A3", "A4", "H-A3", "H-B", "A5", "H-C1", "H-C", "B1S", "B2", "B3", "B4", "01", "02", "C1", "03", "04", "05", "C2", "06", "07", "08", "D3", "10", "09", "E1", "14", "15", "12", "13", "16", "F2", "F3", "18", "19", "20", "22", "21", "H2", "23", "H4", "H6", "25", "26", "27", "28", "29", "30", "31", "I2", "33", "J2", "K2", "M3"))
+
+percent_plot <- ggplot(data=freq_94_23) + 
+  geom_col(aes(x = Station_Name, y = Percentage, width=0.8, fill=Percentage, label1=Percentage, label2=Station_Name)) +
+      labs(title = "Percentage of Years Station Has Been Hypoxic Between 1994 and 2023", 
+        y= "Percentage", 
+        x= "Station") +
+      scale_fill_viridis(option = "H", discrete = FALSE)+
+     scale_x_discrete(expand = c(0,0))+
+      theme(legend.position = c(0.9,0.7), 
+        plot.title = element_text(size = 15), 
+        axis.title = element_text(size = 15), 
+        strip.background = element_rect(colour="black", fill="white"),
+        axis.text.x = element_text(angle = 90), 
+        legend.key.size = unit(0.5, 'cm'),
+        legend.title=element_text(size=8), 
+        legend.text =element_text(size=8))
+
+
+plotly:: ggplotly(percent_plot, tooltip = c("label1", "label2"), fig.align='center')
+
+
+```
+
+
+
+### **Data Downloads**
+*Click these buttons to download the data utilized in the data visualizations produced for the 2023 Hypoxia Season Quick Facts.* 
+
+
+```{r}
+## r script for download button- see https://fmmattioni.github.io/downloadthis/index.html
+
+##install.packages("downloadthis")
+##remotes::install_github("fmmattioni/downloadthis")
+##library(downloadthis)
+
+##list(dt) %>%
+##  download_this(
+##    output_name = "2023 Long Island Sound Hypoxia Season Cruise Information dataset",
+##    output_extension = ".xlsx",
+##    button_label = "Download Cruise Info as xlsx",
+##    button_type = "warning",
+##    has_icon = TRUE,
+##    icon = "fa fa-save"
+##  )
+##options(repos = list(CRAN = "http://cran/rstudio.com/"))
+```
+<brk>
+<brk>
+```{r}
+##list(MovAvg) %>%
+##  download_this(
+##    output_name = "Maximum Area and Duration of Hypoxia dataset",
+##    output_extension = ".xlsx",
+##    button_label = "Download Maximum Area and Duration as xlsx",
+##    button_type = "warning",
+##    has_icon = TRUE,
+##    icon = "fa fa-save"
+##  )
+```
+<brk>
+<brk>
+```{r}
+##list(TimDur) %>%
+##  download_this(
+##    output_name = "Timing and Duration of Hypoxia in LIS dataset",
+##    output_extension = ".xlsx",
+##    button_label = "Download Timing and Duration as xlsx",
+##    button_type = "warning",
+##    has_icon = TRUE,
+##    icon = "fa fa-save"
+##  )
+```
+<brk>
+<brk>
+```{r}
+##list(HypoxicVol) %>%
+##  download_this(
+##    output_name = "Volume of LIS Bottom Waters Below 3 mg/L dataset",
+##    output_extension = ".xlsx",
+##    button_label = "Download Volume Below 3 Info as xlsx",
+##    button_type = "warning",
+##    has_icon = TRUE,
+##    icon = "fa fa-save"
+##  )
+```
+<brk>
+<brk>
+```{r}
+##list(dt1) %>%
+##  download_this(
+##    output_name = "2023 Long Island Sound Hypoxia Season Volume dataset",
+##    output_extension = ".xlsx",
+##    button_label = "Download 2023 LIS Hypoxic Volume Info as xlsx",
+##    button_type = "warning",
+##    has_icon = TRUE,
+##    icon = "fa fa-save"
+ ## )
+```
+<brk>
+<brk>
+```{r}
+##list(freq_94_23) %>%
+##  download_this(
+##    output_name = "Frequency of Hypoxia dataset",
+##    output_extension = ".xlsx",
+##    button_label = "Download Frequency of Hypoxia Info as xlsx",
+##    button_type = "warning",
+##    has_icon = TRUE,
+##    icon = "fa fa-save"
+##  )
+```
+<brk>
+<brk>
+
