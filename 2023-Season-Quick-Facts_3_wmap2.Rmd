@@ -31,7 +31,7 @@ Since 1991, [CT DEEP](https://portal.ct.gov/DEEP/Water/LIS-Monitoring/LIS-Water-
 
 During the summer (June -September), surveys are conducted at bi-weekly intervals to better define the areal extent and duration of hypoxia. During these surveys stations are sampled for in situ parameters including dissolved oxygen, temperature, pH, and salinity. 
 
-```{r}
+```{r eval = FALSE, echo = FALSE}
 ##install.packages("sf")
 ##install.packages ("geojsonio")
 ##install.packages ("htmltools")
@@ -100,7 +100,7 @@ addCircleMarkers(data=RefPts[RefPts$StationType == 'IEC',],
         ##  position = 'bottomleft')%>%
   
   addLegend("bottomright", 
-            pal=pal, 
+             pal=pal,
             values  = RefPts$StationType,
   title= "Long Island Sound <br> Monitoring Stations")
 
@@ -134,17 +134,111 @@ dt %>%
 ```
 
 ## **Weather Summary**
-Leading up to 2023’s hypoxia survey season, Connecticut experienced its warmest winter on record, with temperatures 2 F to 8 F above normal in February. Much of the Northeast ranked within the warmest 20 for maximum temperature averages during the Spring season (Mar-May). 
+Leading up to 2023’s hypoxia survey season, Connecticut experienced its warmest winter on record, with temperatures 2ºF to 8ºF above normal in February. Much of the Northeast ranked within the warmest 20 for maximum temperature averages during the Spring season (Mar-May). Precipitation ramped up in June, causing major flooding across the Northeast and increasing the flow of debris and runoff into the region’s rivers. June also had a drop in temperatures and air quality, with winds funneling smoke from Quebec wildfires into the region.  
 
-Precipitation ramped up in June, causing major flooding across the Northeast and increasing the flow of debris and runoff into the region’s rivers. June also had a drop in temperatures and air quality, with winds funneling smoke from Quebec wildfires into the region. 
+Moving into July, there were both record heat and rainfall. Precipitation fell at 200% to 300% of normal, making it the fourth wettest July on record for the Northeast. Twenty-three major climate sites ranked July 2023 among their 20 warmest Julys on record and nineteen climate sites ranked July among their 20 all-time warmest months on record. States like Virginia and Pennsylvania saw 100-year and 500-year storm events. In August, temperatures dipped again with 29 out of the 35 major climate sites recorded as cooler than normal. The NRCC also observed 130 percent of normal precipitation within the region.  
 
-Moving into July, there were both record heat and rainfall. Precipitation fell at 200% to 300% of normal, making it the fourth wettest July on record for the Northeast. Twenty-three major climate sites ranked July 2023 among their 20 warmest Julys on record and nineteen climate sites ranked July among their 20 all-time warmest months on record. States like Virginia and Pennsylvania saw 100-year and 500-year storm events. 
+During August, there were 30 confirmed tornadoes in the Northeast, reaching seven times the region’s August average of four tornadoes (based on 1998-2022 data). September ranked among the 20 warmest Septembers on record for 10 states and ranked among the 20 wettest on record for five states. September’s precipitation was highly variable, ranging from 71% of normal in West Virginia to 215% of normal in Connecticut. Two tropical systems affected the Northeast in September. Hurricane Lee produced rough surf and rip currents along the East Coast from around September 13 to 16 and Tropical Storm Ophelia resulted in multiple days of higher-than-usual water levels and contributed to major flash flooding in New York City on the 29th.   
 
-In August, temperatures dipped again with 29 out of the 35 major climate sites recorded as cooler than normal. We also saw 130 percent of normal precipitation within the region. During August, there were also 30 confirmed tornadoes in the Northeast, reaching seven times the region’s August average of four tornadoes (based on 1998-2022 data). 
 
-September ranked among the 20 warmest Septembers on record for 10 states and ranked among the 20 wettest on record for five states. September’s precipitation was highly variable, ranging from 71% of normal in West Virginia to 215% of normal in Connecticut. Two tropical systems affected the Northeast in September. Hurricane Lee produced rough surf and rip currents along the East Coast from around September 13 to 16 and Tropical Storm Ophelia resulted in multiple days of higher-than-usual water levels and contributed to major flash flooding in New York City on the 29th.
+```{r, echo=FALSE, out.width="25%", fig.align = 'left'}
 
+knitr::include_graphics("C:/R/plots/percent_normal_ppt_2022.png")
+
+
+
+```
+```{r, echo=FALSE, out.width="25%", fig.align = 'left'}
+
+knitr::include_graphics("C:/R/plots/percent_normal_ppt_2023.png")
+
+
+
+```
+   
+   
+```{r, echo=FALSE, out.width="25%", fig.align = 'left'}
+
+knitr::include_graphics("C:/R/plots/total_ppt_2022.png")
+
+```
+ 
+ 
+```{r, echo=FALSE, out.width="25%", fig.align = 'left'}
+
+knitr::include_graphics("C:/R/plots/total_ppt_2023.png")
+
+
+
+```
+    
+
+During 2022, the Northeast saw 45.40 inches of precipitation, which was 100 percent of normal. So far, 2023 shows increased departures from normal precipitation in the Northeastern states.  
+
+```{r}
+library(ggplot2)
+library (readxl)
+library (plotly)
+
+##Precipgr  <- read_excel("C:\\R\\data\\Precipitation graphs.xlsx")
+
+survey <- data.frame(group=rep(c("Year-to-Date_Precipitation", "Normal- YTD_Precipitation"),each=8),
+                     County=rep(c("Fairfield", "Hartford", "Litchfield", "Middlesex", "NewHaven",   
+                                 "NewLondon", "Tolland", "Windham"),2),
+                     Precipitation=c(46.69, 52.71, 50.9, 45.99, 45.56, 39.19, 52.04, 50.43, 40.99, 41.22, 41.22, 41.41, 41.41, 39.64, 39.63, 39.65))
+
+ggplot(survey, aes(x=County, y=Precipitation, fill=group)) + 
+  geom_col(stat="identity", width= 0.7, position=position_dodge(width=0.8))+
+labs(title =("Connecticut Precipitation (November 2023)"), 
+        y= "Precipitation (in)", 
+        x= "County") +
+      theme(legend.position = "bottom", 
+        axis.text.x = element_text(angle = -45), 
+        legend.title=element_blank(),
+        legend.text =element_text(size=10))+
+  scale_fill_manual(values= c("maroon", "orange"))
+
+      
+
+  
+  
+```
+```{r}
+library(ggplot2)
+library (readxl)
+library (plotly)
+library (forcats)
+
+Precip_rank <- data.frame(group=rep(c("2023 Precipitation Rank", "2022 Precipitation Rank"),each=9),
+  month=c("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep"),
+                 Rank_Nth_driest=c(117, 7, 62, 89, 40, 35, 128, 86, 126, 35, 101, 30, 88, 31, 67,
+                                   11, 34, 108))
+
+Precip_rank %>%
+  mutate(month = fct_relevel(month, 
+            "Sep", "Aug", "Jul", "Jun", "May", "Apr","Mar", "Feb", "Jan")) %>%
+ggplot(aes(x=month, y=Rank_Nth_driest, fill=group)) + 
+  geom_bar(stat="identity", width= 0.7, position=position_dodge(width=0.8))+
+labs(title =("Monthly Precipitation Rankings in Connecticut"), 
+        subtitle= "2022 vs 2023", 
+        y= "Rank Nth driest", 
+        x= "Month") +
+            theme(legend.position = "bottom", 
+            legend.title=element_blank(),
+        legend.text =element_text(size=10))+
+  scale_fill_manual(values= c("blue", "red"))+ 
+  scale_y_continuous(breaks= seq(0, 140, by=10), expand = c(0,2))+
+coord_flip() 
+
+
+```
+<brk>
+<brk>
+
+ 
+*Rankings are by NRCC for the 129 years between 1895 and 2023. 1=driest; 129=wettest*
 *Data and summary adapted from https://www.nrcc.cornell.edu/*
+More Info: [NERFC Precipitation Totals and Departures from Normal] (https://www.weather.gov/nerfc/watersupply)| [NRCC Summary Tables](https://www.nrcc.cornell.edu/regional/tables/tables.html) |[EPSTAR Drought and Water Resources Guidance](w1.weather.gov/data/TAR/ESPTAR)
 
 
 ## **Maximum Hypoxic Area**
