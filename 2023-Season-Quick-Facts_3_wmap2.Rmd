@@ -1,8 +1,8 @@
 ---
 title: |
-  ![](C:/R/plots/DEEP_seal.jpg){width=1in}Long Island Sound Water Quality Monitoring Program (LISWQMP)
+  ![](C:/R/plots/DEEP_seal.jpg){width=1in} <br> Long Island Sound Water Quality Monitoring Program (LISWQMP)
 ##author: "Katie O'Brien-Clayton"
-##date: "`r Sys.Date()`"
+date: "`r Sys.Date()`"
 ##output: html_document
 
 ---
@@ -31,7 +31,7 @@ Since 1991, [CT DEEP](https://portal.ct.gov/DEEP/Water/LIS-Monitoring/LIS-Water-
 
 During the summer (June -September), surveys are conducted at bi-weekly intervals to better define the areal extent and duration of hypoxia. During these surveys stations are sampled for in situ parameters including dissolved oxygen, temperature, pH, and salinity. 
 
-```{r eval = FALSE, echo = FALSE}
+```{r}
 ##install.packages("sf")
 ##install.packages ("geojsonio")
 ##install.packages ("htmltools")
@@ -40,31 +40,25 @@ During the summer (June -September), surveys are conducted at bi-weekly interval
 ##install.packages(c("sp", "raster"))
 
 library(leaflet)
-library(magrittr)
-library(sf)
-library(geojsonio)
-library(htmltools)
-library(htmlwidgets)
-library(stringi)
-library(RColorBrewer)
 library(readxl)
-library(sp)
-library (raster)
-##library (rgdal)
+
 
 
 
 RefPts <- read_excel("C:\\R\\Data\\ReferencePoints.xlsx")
 
-
+RefPts$color <- ifelse(RefPts$StationType == "CTDEEP", "blue", 
+                ifelse(RefPts$StationType == "UCONN", "yellow", "salmon"))
+  
+  
 mRefPts <-leaflet() %>% 
   addProviderTiles(providers$CartoDB.PositronNoLabels) %>% 
   setView(lng = -72.799, lat = 41.126, zoom = 9) %>%   
-  addCircleMarkers(data=RefPts[RefPts$StationType == 'CTDEEP',], 
+  addCircleMarkers(data=RefPts,  
                   lng= ~Longitude,
                   lat= ~Latitude, 
                   radius = 2,
-                  color = 'blue',
+                  color = ~color, 
                   popup=~paste(RefPts$StationType, "<br> Station_Name:", RefPts$Station_Name,
                             "<br>Depth:", RefPts$Approximate_Depth,
                             "<br>Schedule:", RefPts$Schedule,
@@ -72,36 +66,14 @@ mRefPts <-leaflet() %>%
                             "<br>Parameters:", RefPts$Parameters), 
                   label = ~as.character(RefPts$Station_Name, RefPts$Approximate_Depth))%>%
 
-addCircleMarkers(data=RefPts[RefPts$StationType == 'UCONN',], 
-                  lng= ~Longitude,
-                  lat= ~Latitude, 
-                  radius = 2,
-                  color = 'yellow',
-                  popup=~paste(RefPts$StationType, "<br> Station_Name:", RefPts$Station_Name,
-                            "<br>Depth:", RefPts$Approximate_Depth,
-                            "<br>Schedule:", RefPts$Schedule,
-                            "<br>Sampling Dates:", RefPts$`Sampling Dates`,
-                            "<br>Parameters:", RefPts$Parameters), 
-                  label = ~as.character(RefPts$Station_Name, RefPts$Approximate_Depth))%>%
+
+  ##addLayersControl(overlayGroups = c('CTDEEP', 'UCONN', 'IEC'),           ##options=layersControlOptions(collapsed=FALSE),
+ ##         position = 'bottomleft')%>%
   
-addCircleMarkers(data=RefPts[RefPts$StationType == 'IEC',], 
-                  lng= ~Longitude,
-                  lat= ~Latitude, 
-                  radius = 2,
-                  color = 'salmon',
-                  popup=~paste(RefPts$StationType, "<br> Station_Name:", RefPts$Station_Name,
-                            "<br>Depth:", RefPts$Approximate_Depth,
-                            "<br>Schedule:", RefPts$Schedule,
-                            "<br>Sampling Dates:", RefPts$`Sampling Dates`,
-                            "<br>Parameters:", RefPts$Parameters), 
-                  label = ~as.character(RefPts$Station_Name, RefPts$Approximate_Depth))%>%
-  
-  ##addLayersControl(overlayGroups = c('CTDEEP', 'UCONN', 'IEC'),           options=layersControlOptions(collapsed=FALSE),
-        ##  position = 'bottomleft')%>%
-  
-  addLegend("bottomright", 
-             pal=pal,
-            values  = RefPts$StationType,
+  addLegend("bottomright",
+            opacity = 1.0, 
+            colors= c("blue", "yellow", "salmon"),
+            labels= c("CTDEEP", "UCONN", "IEC"),
   title= "Long Island Sound <br> Monitoring Stations")
 
                   
@@ -232,17 +204,22 @@ coord_flip()
 
 
 ```
-<brk>
-<brk>
+<br>
+<br>
 
  
 *Rankings are by NRCC for the 129 years between 1895 and 2023. 1=driest; 129=wettest*
+<br>
 *Data and summary adapted from https://www.nrcc.cornell.edu/*
-More Info: [NERFC Precipitation Totals and Departures from Normal] (https://www.weather.gov/nerfc/watersupply)| [NRCC Summary Tables](https://www.nrcc.cornell.edu/regional/tables/tables.html) |[EPSTAR Drought and Water Resources Guidance](w1.weather.gov/data/TAR/ESPTAR)
+<br>
+<br>
+More Info: [NERFC Precipitation Totals and Departures from Normal](https://www.weather.gov/nerfc/watersupply)<br>
+[NRCC Summary Tables](https://www.nrcc.cornell.edu/regional/tables/tables.html) <br>
+[EPSTAR Drought and Water Resources Guidance](w1.weather.gov/data/TAR/ESPTAR)
 
 
 ## **Maximum Hypoxic Area**
-CTDEEP utilizes Geographic Information System (GIS) software to create interpolations of bottom water dissolved oxygen concentrations across LIS and estimate the area effected by hypoxia on a cruise by cruise basis. A [video](https://youtu.be/cl7MmCm8Kao?list=PLN8TZ_MzsZN_RhkPBddClSNZz74MDdr2b) was created to show changes in the maximum hypoxic area over time.
+CTDEEP utilizes Geographic Information System (GIS) software to create interpolations of bottom water dissolved oxygen concentrations across LIS and estimate the area effected by hypoxia on a cruise by cruise basis. A [**video**](https://youtu.be/cl7MmCm8Kao?list=PLN8TZ_MzsZN_RhkPBddClSNZz74MDdr2b) was created to show changes in the maximum hypoxic area over time.
 
 **In 2023, the maximum area of Long Island Sound with bottom water dissolved oxygen (DO) concentrations below 3.0 mg/L was 126.8 sq. mi (328.4 sq. km) and occurred during the WQAUG23 survey conducted 31 July - 3 August 2023.** During this survey four stations had DO concentrations below 2 mg/L, eight stations had concentrations below 3.0 mg/L, and 10 stations had concentrations between 3 and 3.5 mg/L. The lowest dissolved oxygen concentration recorded during the survey was 1.69 mg/L at Station A4.
 
@@ -258,24 +235,35 @@ knitr::include_graphics("C:/R/projects/WQAUG23_DO_MAP.jpg")
 <brk>
 The LISS utilizes a five-year rolling average to determine progress towards meeting the management target of reducing the area of LIS bottom water exhibiting hypoxic conditions. In assessing trends, LISS uses the five-year rolling average, instead of from year to year, because conditions in any given year could be impacted by variable factors, such as extreme changes in heat or precipitation, which average out over time.The years  1987-1999  are used as a benchmark (or the baseline) because they represent the beginning of Long Island Sound Study’s water quality monitoring program, prior to the Total Maximum Daily Load (TMDL) agreement in 2000 to reduce nitrogen loads into the Sound. Read more about the [hypoxia extent ecosystem target](https://longislandsoundstudy.net/ecosystem-target-indicators/lis-hypoxia/) established by the LISS.
 
-This interactive graph shows the maximum area of hypoxia in square miles (blue bars), duration of hypoxic conditions in days (black circles), and the five-year rolling average area in square miles (green line). 
+This interactive graph shows the maximum area of hypoxia in square miles (blue bars), duration of hypoxic conditions in days (black circles), and the five-year rolling average area in square miles (green line).
+<br>
+<br>
+<br>
 <center>
 ```{r}
+##install.packages("png")
+
 library(ggplot2)
 library (readxl)
+library (png)
 library (plotly)
 
+logo <- readPNG("C:\\R\\projects\\2023 Quick Facts\\Quick-Facts\\logo.png", native=FALSE, info=FALSE)
+                
 MovAvg  <- read_excel("C:\\R\\data\\MovingAverage2023.xlsx")
 
 Avg_plot <- ggplot (data=MovAvg)+
 
   geom_col(aes(x=Year, y=Area), fill="blue")+
-  geom_point(aes (x=Year, y=Duration), color="black")+
-  geom_line(aes(x=Year, y=FiveYearAvg),color="green",size=2)+ 
+  geom_point(aes (x=Year, y=Duration), color= "black")+
+  geom_line(aes(x=Year, y=FiveYearAvg),color= "green", size=2)+ 
   labs(title= "Maximum Area and Duration of Hypoxia", subtitle= "1987-2023 (June-September)")+
-      theme(axis.title = element_blank())
+      theme(title= element_blank())
 
-ggplotly(Avg_plot)
+Avg_plot2<-Avg_plot+ annotation_raster(logo, ymin = 350,ymax= 400,xmin = 2005,xmax = 2025)  
+    
+
+ggplotly(Avg_plot2)
 
 ```
 Area in square miles, Duration in days
@@ -301,8 +289,8 @@ library (plotly)
 
 TimDur  <- read_excel("C:\\R\\data\\timing and duration.xlsx")
 
-TimDur$TimePer <- factor(TimDur$TimePer, levels = c("Before", 
-    "During", "After"))
+TimDur$TimePer <- factor(TimDur$TimePer, levels = c("After", 
+    "During", "Before"))
 
 Dur_plot <- ggplot(data = TimDur) + 
     geom_col(aes( x=Year, y=Day.count, fill= TimDur$TimePer, position= 'stack'))+ 
@@ -310,7 +298,7 @@ Dur_plot <- ggplot(data = TimDur) +
   xlab('Year')+
   ggtitle('Timing and Duration of Hypoxia in Long Island Sound')+
     coord_flip()+
-  scale_fill_manual(values =c("blue", "red", "blue"))+
+  scale_fill_manual(values =c("lightblue", "red", "blue"))+
   theme(plot.title=NULL)+
 labs(fill="")+
   scale_y_continuous(breaks=seq(0,360,by=25), expand = c(0,0))+
@@ -324,8 +312,31 @@ theme(panel.grid = element_blank())
   
   ggplotly(Dur_plot, tooltip = c("Day.count"), fig.align='center')
 ```
+<br>
+<br>
+
+This table displays the onset, duration, and end of the hypoxic events from 1991 through 2023 based on CT DEEP data only. Using the LISS dissolved oxygen standard of 3.0 mg/L, the average date of onset was July 12 (+9 days), the average end date was September 3 (+11 days), and the average duration was 52 days (+13 days).  
+
+The earliest onset of hypoxia occurred on June 25, 2002, and the latest end date occurred on September 20, 2005.  
+
+The maximum area of hypoxia was 393 square miles and occurred in 1994. The longest hypoxic event occurred in 2008 and lasted 79 days. The shortest hypoxic event occurred in 2017 and lasted 26 days.  
+
+In 2014, 2016, 2017, 2018, and 2020 there were clear periods where the DO concentration rose above the 3.0 mg/L threshold in the early/middle part of August before dipping again during late August and early September. 
+
+```{r}
+
+library (readxl)
+library (kableExtra)
 
 
+dt <- read_excel("C:\\R\\Data\\OnsetDuration2023.xlsx")
+
+dt %>%
+  kbl(caption =  "2023 Long Island Sound Onset and Duration of Hypoxia Information", align = "c", col.names = c("Year", "Estimated Start Date", "Estimated End Date", "Maximum Area (mi2)", "Duration (days)")) %>%
+  kable_classic(full_width = F, html_font = "Cambria") %>%
+  scroll_box(height="300px") 
+  
+```
 
 
 
