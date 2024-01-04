@@ -1,15 +1,50 @@
 /*----------LOGO above TOC---------*/
 
-#TOC::before {
+/* #TOC::before {
   content: "";
   display: block;
   height: 100px;
   margin: 2em 20px 40px 20px;
-  background-image: url(C:\R\projects\2023 Quick Facts\Quick-Facts\DEEP_Seal.png);
+  background-image: url(DEEP_Seal.png);
   background-size: contain;
   background-position: center center;
   background-repeat: no-repeat;
-}
+}*/
+
+/* Page Style - DEEP Brand Standards */
+@font-face {
+    font-family: 'Public Sans';
+    font-style: normal;
+    font-weight: 400;
+    src: url(https://fonts.gstatic.com/s/publicsans/v15/ijwGs572Xtc6ZYQws9YVwllKVG8qX1oyOymuFpmJxAco.woff2) format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+  }
+
+  body {
+    font-family: 'Public Sans', sans-serif;
+
+  }
+
+  h1 {
+    color: #0D2D6C;
+    font-family: 'Public Sans', sans-serif;
+    font-weight: bolder;
+  }
+
+  h2 {
+    color: #00AAE7;
+    font-family: 'Public Sans', sans-serif;
+    font-weight: bold;
+  }
+
+  a {
+    color: #00AAE7;
+  }
+
+  a :hover {
+    background-color: #f6931f;
+  }
+
 
 
 /* -----------HERO IMAGE AT TOP OF PAGE -----------*/
@@ -61,3 +96,5 @@ main > nav {
   width: 100% !important;
   align-self: start;
 }
+
+

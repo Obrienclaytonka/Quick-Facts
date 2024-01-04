@@ -1,9 +1,10 @@
 ---
-title: "2023 Hypoxia Season Summary"
+title: ""
 ##author: "Katie O'Brien-Clayton"
 ##date: "`r Sys.Date()`"
 output: 
-    html_document:
+    bookdown::html_document2:
+      number_sections: false
       css: style.css
       toc: yes
       toc_float: 
@@ -28,17 +29,18 @@ options(repos = list(CRAN = "http://cran/rstudio.com/"))
 
 
  
-
+<hr>
 ## **Background** 
-Hypoxia is a condition of low dissolved oxygen (DO) concentrations in the waters of Long Island Sound (LIS) that impacts up to half of the Sound’s waters each summer. The primary cause of hypoxia is nitrogen enrichment that comes from a variety of sources throughout the Long Island Sound watershed, in particular sewage treatment plants, stormwater runoff and atmospheric deposition.
+<hr>
+Hypoxia is a condition in which of low or depleted dissolved oxygen concentrations are observed in the waters of Long Island Sound (LIS).  Hypoxia impacts up to half of the LIS waters each summer. The primary cause of hypoxia is excess nitrogen from human sources. These sources include sewage treatment plant discharges, storm water runoff and atmospheric deposition.
 
-For LIS, DO levels below 3.0 mg/L are considered hypoxic, causing mobile animals to leave and sessile animals to die or be physically or behaviorally impaired. However, early studies in LIS by Connecticut Department of Energy and Environmental Protection (CT DEEP) Marine Fisheries biologists found that DO can become limiting below 4.8 mg/L for sensitive fish species, while more tolerant species are not affected until DO falls below 2.0 mg/L (Simpson et al, 1995, 1996).  
+Dissolved oxygen (DO) levels below 3.0 mg/L are considered hypoxic in LIS.  Hypoxic conditions causes impairment and in some cases, death to aquatic life. Some studies have found DO can become limiting below 4.8 mg/L for sensitive fish species, while more tolerant species are not affected until DO falls below 2.0 mg/L (Simpson et al 1995,1996).  
 
-Since 1991, [CT DEEP](https://portal.ct.gov/DEEP/Water/LIS-Monitoring/LIS-Water-Quality-and-Hypoxia-Monitoring-Program-Overview) and the [Interstate Environmental Commission (IEC)](https://www.iec-nynjct.org/programs/water/sound-monitoring) have conducted an intensive water quality monitoring program on Long Island Sound. The program is funded through a grant from the EPA's [Long Island Sound Study](https://longislandsoundstudy.net/). Data from the surveys are used to quantify and identify annual trends and differences in water quality parameters relevant to hypoxia (low dissolved oxygen), especially nutrients, temperature, and chlorophyll. These data are also used to evaluate the effectiveness of the management program to reduce nitrogen concentrations, since nitrogen is a primary contributor to the excessive algae growth that leads to hypoxia in LIS. 
+Since 1991, [CT DEEP](https://portal.ct.gov/DEEP/Water/LIS-Monitoring/LIS-Water-Quality-and-Hypoxia-Monitoring-Program-Overview) and the [Interstate Environmental Commission (IEC)](https://www.iec-nynjct.org/programs/water/sound-monitoring) have conducted an intensive water quality monitoring program on LIS. The program is funded through a grant from the U.S. Environmental Protection Agency's (EPA) [Long Island Sound Study](https://longislandsoundstudy.net/). Data from the surveys are used to quantify and identify annual trends and differences in water quality parameters relevant to hypoxia, in particular nutrients, temperature, and chlorophyll. These data are also used to evaluate the effectiveness of the LIS management programs efforts to reduce anthropogenic nitrogen inputs, since nitrogen is a primary contributor to the excessive algae growth that leads to hypoxia in LIS. 
 
-During the summer (June -September), surveys are conducted at bi-weekly intervals to better define the areal extent and duration of hypoxia. During these surveys stations are sampled for in situ parameters including dissolved oxygen, temperature, pH, and salinity. Explore the interactive map to determine which stations are sampled year-round and which are sampled during the hypoxia surveys. 
+During the summer (June - September), surveys across LIS (Figure 1) are conducted at bi-weekly intervals to better define the areal extent and duration of hypoxia. During these surveys stations are sampled for in-situ parameters including dissolved oxygen, temperature, pH, and salinity. 
 
-```{r}
+```{r, fig.cap = '<i> Interactive map of LIS survey stations.  Click on each station to find information on sampling index period for that station. </i>'}
 ##install.packages("sf")
 ##install.packages ("geojsonio")
 ##install.packages ("htmltools")
@@ -52,7 +54,7 @@ library(readxl)
 
 
 
-RefPts <- read_excel("C:\\R\\Data\\ReferencePoints.xlsx")
+RefPts <- read_excel("ReferencePoints2.xlsx")
 
 RefPts$color <- ifelse(RefPts$StationType == "CTDEEP", "blue", 
                 ifelse(RefPts$StationType == "UCONN", "yellow", "salmon"))
@@ -88,14 +90,17 @@ mRefPts
 
 ```
 
-The table below provides a summary of the 2023 Hypoxia Season at a glance.
+</br>
 
-During the summer of 2023, CT DEEP conducted seven surveys between May 31 and September 7, while IEC conducted twelve surveys between June 28 and September 12. Hypoxic conditions were documented during three CT DEEP surveys and nine IEC surveys.  
+During the summer of 2023, CT DEEP conducted seven surveys across LIS between May 31 and September 7.  IEC conducted twelve surveys in western LIS between June 28 and September 12. Hypoxic conditions were documented during three CT DEEP surveys and nine IEC surveys.  
 
-Data from all CTDEEP cruises can be downloaded from the [UCONN ERDDAP](http://merlin.dms.uconn.edu:8080/erddap/tabledap/DEEP_WQ.html). All samples are collected and analyzed under EPA-approved Quality Assurance Project Plans.
+<!-- Data from all CTDEEP cruises can be downloaded from the [UCONN -->
+<!-- ERDDAP](http://merlin.dms.uconn.edu:8080/erddap/tabledap/DEEP_WQ.html). All -->
+<!-- samples are collected and analyzed under EPA-approved Quality Assurance Project -->
+<!-- Plans. -->
 
 
-```{r}
+```{r, tab.cap = '<i> Summary of sampling events during the 2023 Hypoxia Season</i>'}
 
 install.packages("kbleExtra")
 
@@ -103,7 +108,7 @@ library (readxl)
 library (kableExtra)
 
 
-dt <- read_excel("C:\\R\\Data\\CruiseInfoTable2023.xlsx")
+dt <- read_excel("CruiseInfoTable2023.xlsx")
 
 dt %>%
   kbl(caption =  "2023 Long Island Sound Hypoxia Season Cruise Information", align = "c", col.names = c("Cruise", "Start Date", "End Date", "Number of Stations Sampled", "Number of Hypoxic Stations", "Hypoxic Area (mi2)", "Minimum DO", "Station Where Minimum DO Occurred")) %>%
@@ -111,78 +116,82 @@ dt %>%
   scroll_box(height="300px") 
   
 ```
-
+<hr>
 ## **Weather Summary**
-Leading up to 2023’s hypoxia survey season, Connecticut experienced its warmest winter on record, with temperatures 2ºF to 8ºF above normal in February. Much of the Northeast ranked within the warmest 20 for maximum temperature averages during the Spring season (Mar-May). Precipitation ramped up in June, causing major flooding across the Northeast and increasing the flow of debris and runoff into the region’s rivers. June also had a drop in temperatures and air quality, with winds funneling smoke from Quebec wildfires into the region.  
+<hr>
+Leading up to 2023’s hypoxia survey season, Connecticut experienced its warmest winter on record, with temperatures 2ºF to 8ºF above normal in February. Much of the Northeast ranked within the warmest 20 for maximum temperature averages during the Spring season (Mar-May). Above average precipitation in June caused major flooding across the Northeast and increased the flow of debris and runoff into the region’s rivers. June also had a drop in temperatures and air quality, with winds funneling smoke from Quebec wildfires into the region.  
 
-Moving into July, there were both record heat and rainfall. Precipitation fell at 200% to 300% of normal, making it the fourth wettest July on record for the Northeast. Twenty-three major climate sites ranked July 2023 among their 20 warmest Julys on record and nineteen climate sites ranked July among their 20 all-time warmest months on record. States like Virginia and Pennsylvania saw 100-year and 500-year storm events. In August, temperatures dipped again with 29 out of the 35 major climate sites recorded as cooler than normal. The NRCC also observed 130 percent of normal precipitation within the region.  
+In July the Northeast experienced both record heat and rainfall. Precipitation fell at 200% to 300% of normal, making it the fourth wettest July on record for the Northeast. In August, temperatures dipped with 29 out of the 35 major climate sites recorded as cooler than normal. The Northeast Regional Climate Center (NRCC) also observed 130 percent of normal precipitation within the region.  
 
-During August, there were 30 confirmed tornadoes in the Northeast, reaching seven times the region’s August average of four tornadoes (based on 1998-2022 data). September ranked among the 20 warmest Septembers on record for 10 states and ranked among the 20 wettest on record for five states. September’s precipitation was highly variable, ranging from 71% of normal in West Virginia to 215% of normal in Connecticut. Two tropical systems affected the Northeast in September. Hurricane Lee produced rough surf and rip currents along the East Coast from around September 13 to 16 and Tropical Storm Ophelia resulted in multiple days of higher-than-usual water levels and contributed to major flash flooding in New York City on the 29th.   
+During August, there were 30 confirmed tornadoes in the Northeast, reaching seven times the region’s August average of four tornadoes (based on 1998-2022 data). September ranked among the 20 warmest Septembers on record for 10 states and ranked among the 20 wettest on record for five states. September’s precipitation was 215% of normal in Connecticut. Two tropical systems affected the Northeast in September. Hurricane Lee produced rough surf and rip currents along the East Coast from around September 13 to 16 and Tropical Storm Ophelia resulted in multiple days of higher-than-usual water levels and contributed to major flash flooding in New York City on the 29th.   
 
-
-```{r, echo=FALSE, out.width="90%", fig.align = 'center'}
-
-knitr::include_graphics("C:/R/plots/percent_normal_ppt_2022.png")
+<!-- You have different time periods than the sampling period for maps so I would suggest removing. -->
 
 
+<!-- ```{r, echo=FALSE, out.width="90%", fig.align = 'center''} -->
 
-```
-```{r, echo=FALSE, out.width="90%", fig.align = 'center'}
-
-knitr::include_graphics("C:/R/plots/percent_normal_ppt_2023.png")
+<!-- knitr::include_graphics("percent_normal_ppt_2022.png") -->
 
 
 
-```
-   
-   
-```{r, echo=FALSE, out.width="90%", fig.align = 'center'}
+<!-- ``` -->
 
-knitr::include_graphics("C:/R/plots/total_ppt_2022.png")
+<!-- ```{r, echo=FALSE, out.width="90%", fig.align = 'center'} -->
 
-```
- 
- 
-```{r, echo=FALSE, out.width="90%", fig.align = 'center'}
-
-knitr::include_graphics("C:/R/plots/total_ppt_2023.png")
+<!-- knitr::include_graphics("percent_normal_ppt_2023.png") -->
 
 
 
-```
-    
+<!-- ``` -->
+
+
+<!-- ```{r, echo=FALSE, out.width="90%", fig.align = 'center'} -->
+
+<!-- knitr::include_graphics("total_ppt_2022.png") -->
+
+<!-- ``` -->
+
+
+<!-- ```{r, echo=FALSE, out.width="90%", fig.align = 'center'} -->
+
+<!-- knitr::include_graphics("total_ppt_2023.png") -->
+
+
+
+<!-- ``` -->
+
 
 During 2022, the Northeast saw 45.40 inches of precipitation, which was 100 percent of normal. So far, 2023 shows increased departures from normal precipitation in the Northeastern states.  
 
-```{r}
-library(ggplot2)
-library (readxl)
-library (plotly)
+<!-- ### November is outside the hypoxic sampling period so I would remove or create a graph using data during the sampling period ####-->
 
-##Precipgr  <- read_excel("C:\\R\\data\\Precipitation graphs.xlsx")
+<!-- ```{r'} -->
+<!-- library(ggplot2) -->
+<!-- library (readxl) -->
+<!-- library (plotly) -->
 
-survey <- data.frame(group=rep(c("Year-to-Date_Precipitation", "Normal- YTD_Precipitation"),each=8),
-                     County=rep(c("Fairfield", "Hartford", "Litchfield", "Middlesex", "NewHaven",   
-                                 "NewLondon", "Tolland", "Windham"),2),
-                     Precipitation=c(46.69, 52.71, 50.9, 45.99, 45.56, 39.19, 52.04, 50.43, 40.99, 41.22, 41.22, 41.41, 41.41, 39.64, 39.63, 39.65))
+<!-- ##Precipgr  <- read_excel("Precipitation graphs.xlsx") -->
 
-ggplot(survey, aes(x=County, y=Precipitation, fill=group)) + 
-  geom_col(stat="identity", width= 0.7, position=position_dodge(width=0.8))+
-labs(title =("Connecticut Precipitation (November 2023)"), 
-        y= "Precipitation (in)", 
-        x= "County") +
-      theme(legend.position = "bottom", 
-        axis.text.x = element_text(angle = -45), 
-        legend.title=element_blank(),
-        legend.text =element_text(size=10))+
-  scale_fill_manual(values= c("maroon", "orange"))
+<!-- survey <- data.frame(group=rep(c("Year-to-Date_Precipitation", "Normal- YTD_Precipitation"),each=8), -->
+<!--                      County=rep(c("Fairfield", "Hartford", "Litchfield", "Middlesex", "NewHaven",    -->
+<!--                                  "NewLondon", "Tolland", "Windham"),2), -->
+<!--                      Precipitation=c(46.69, 52.71, 50.9, 45.99, 45.56, 39.19, 52.04, 50.43, 40.99, 41.22, 41.22, 41.41, 41.41, 39.64, 39.63, 39.65)) -->
 
-      
+<!-- ggplot(survey, aes(x=County, y=Precipitation, fill=group)) +  -->
+<!--   geom_col(stat="identity", width= 0.7, position=position_dodge(width=0.8))+ -->
+<!-- labs(title =("Connecticut Precipitation (November 2023)"),  -->
+<!--         y= "Precipitation (in)",  -->
+<!--         x= "County") + -->
+<!--       theme(legend.position = "bottom",  -->
+<!--         axis.text.x = element_text(angle = -45),  -->
+<!--         legend.title=element_blank(), -->
+<!--         legend.text =element_text(size=10))+ -->
+<!--   scale_fill_manual(values= c("maroon", "orange")) -->
 
-  
-  
-```
-```{r}
+<!-- ``` -->
+
+```{r, fig.cap = '<i>Monthly rankings for precipitation in Connecticut in 2022 and 2023. Rankings are by NRCC for the 129 years between 1895 and 2023. 1 = driest; 129 = wettest. Data and summary adapted from https://www.nrcc.cornell.edu/ </i>'}
+
 library(ggplot2)
 library (readxl)
 library (plotly)
@@ -209,24 +218,22 @@ labs(title =("Monthly Precipitation Rankings in Connecticut"),
   scale_y_continuous(breaks= seq(0, 140, by=10), expand = c(0,2))+
 coord_flip() 
 
-
 ```
-<br>
-<br>
 
- 
-*Rankings are by NRCC for the 129 years between 1895 and 2023. 1=driest; 129=wettest*
-<br>
-*Data and summary adapted from https://www.nrcc.cornell.edu/*
-<br>
-<br>
-More Info: [NERFC Precipitation Totals and Departures from Normal](https://www.weather.gov/nerfc/watersupply)<br>
-[NRCC Summary Tables](https://www.nrcc.cornell.edu/regional/tables/tables.html) <br>
-[EPSTAR Drought and Water Resources Guidance](w1.weather.gov/data/TAR/ESPTAR)
+<!-- *Rankings are by NRCC for the 129 years between 1895 and 2023. 1=driest; 129=wettest* -->
+<!-- <br> -->
+<!-- *Data and summary adapted from https://www.nrcc.cornell.edu/* -->
+<!-- <br> -->
+<!-- <br> -->
+<!-- More Info: [NERFC Precipitation Totals and Departures from Normal](https://www.weather.gov/nerfc/watersupply)<br> -->
+<!-- [NRCC Summary Tables](https://www.nrcc.cornell.edu/regional/tables/tables.html) <br> -->
+<!-- [EPSTAR Drought and Water Resources Guidance](w1.weather.gov/data/TAR/ESPTAR) -->
 
-
+<hr>
 ## **Maximum Hypoxic Area**
-CTDEEP utilizes Geographic Information System (GIS) software to create interpolations of bottom water dissolved oxygen concentrations across LIS and estimate the area effected by hypoxia on a cruise by cruise basis. A [**video**](https://youtu.be/cl7MmCm8Kao?list=PLN8TZ_MzsZN_RhkPBddClSNZz74MDdr2b) was created to show changes in the maximum hypoxic area over time.
+<hr>
+
+CTDEEP utilizes Geographic Information System (GIS) software to create interpolations of bottom water dissolved oxygen concentrations across LIS and estimate the area effected by hypoxia on a cruise by cruise basis. Changes in the maximum hypoxic area over the LISS sampling period of record can be see in this [**video**](https://youtu.be/cl7MmCm8Kao?list=PLN8TZ_MzsZN_RhkPBddClSNZz74MDdr2b).
 
 **In 2023, the maximum area of Long Island Sound with bottom water dissolved oxygen (DO) concentrations below 3.0 mg/L was 126.8 sq. mi (328.4 sq. km) and occurred during the WQAUG23 survey conducted 31 July - 3 August 2023.** During this survey four stations had DO concentrations below 2 mg/L, eight stations had concentrations below 3.0 mg/L, and 10 stations had concentrations between 3 and 3.5 mg/L. The lowest dissolved oxygen concentration recorded during the survey was 1.69 mg/L at Station A4.
 
@@ -234,7 +241,7 @@ CTDEEP utilizes Geographic Information System (GIS) software to create interpola
 
 ```{r, echo=FALSE, out.width="90%", fig.align = 'center'}
 
-knitr::include_graphics("C:/R/projects/WQAUG23_DO_MAP.jpg")
+knitr::include_graphics("WQAUG23_DO_MAP.jpg")
 
 
 
@@ -255,9 +262,9 @@ library (readxl)
 library (png)
 library (plotly)
 
-logo <- readPNG("C:\\R\\projects\\2023 Quick Facts\\Quick-Facts\\logo.png", native=FALSE, info=FALSE)
+logo <- readPNG("logo.png", native=FALSE, info=FALSE)
                 
-MovAvg  <- read_excel("C:\\R\\data\\MovingAverage2023.xlsx")
+MovAvg  <- read_excel("MovingAverage2023.xlsx")
 
 Avg_plot <- ggplot (data=MovAvg)+
 
@@ -293,7 +300,7 @@ library(ggplot2)
 library (readxl)
 library (plotly)
 
-TimDur  <- read_excel("C:\\R\\data\\timing and duration.xlsx")
+TimDur  <- read_excel("timing and duration.xlsx")
 
 TimDur$TimePer <- factor(TimDur$TimePer, levels = c("After", 
     "During", "Before"))
@@ -335,7 +342,7 @@ library (readxl)
 library (kableExtra)
 
 
-dt <- read_excel("C:\\R\\projects\\2023 Quick Facts\\Quick-Facts\\OnsetDuration2023C.xlsx")
+dt <- read_excel("OnsetDuration2023C.xlsx")
 
 dt %>%
   kbl(caption =  "2023 Long Island Sound Onset and Duration of Hypoxia Information", align = "c", col.names = c("Year", "Estimated Start Date", "Estimated End Date", "Maximum Area (mi2)", "Duration (days)")) %>%
@@ -353,7 +360,7 @@ The University of Connecticut Long Island Sound Integrated Coastal Observing Sys
 ```{r, echo=FALSE, out.width="90%", fig.align = 'center'}
 
 
-knitr::include_graphics("C:/R/plots/exrx_clim_2023.jpg")
+knitr::include_graphics("exrx_clim_2023.jpg")
 
 ```
 
@@ -374,7 +381,7 @@ library (readxl)
 library (kableExtra)
 
 
-dt1 <- read_excel("C:\\R\\Data\\2023_hypoxAreaVol.xlsx")
+dt1 <- read_excel("2023_hypoxAreaVol.xlsx")
 
 dt1 %>%
   kbl(caption =  "2023 Volume Estimates of Hypoxic Long Island Sound Bottom Waters Obtained from the UCONN HypVolApp", align = "c", col.names = c("CRUISE", "2 mg/L", "3 mg/L", "4.8 mg/L", "2 mg/L", "3 mg/L", "4.8 mg/L")) %>%
@@ -405,7 +412,7 @@ library (ggplot2)
 library (readxl)
 
 
-HypoxicVol <- read_excel("C:\\R\\data\\Hypoxic Volume.xlsx")
+HypoxicVol <- read_excel("Hypoxic Volume.xlsx")
 
 Vol_plot <- ggplot (data=HypoxicVol)+
   geom_line(mapping = aes(x=Year, y=Volume)) +
@@ -426,7 +433,7 @@ The bar graph provides a deeper dive into the data (percentages) used to create 
 
 ```{r, echo=FALSE, out.width="90%", fig.align = 'center'}
 
-knitr::include_graphics("C:/R/projects/frequency_IEC_DEEP_2023.jpg")
+knitr::include_graphics("frequency_IEC_DEEP_2023.jpg")
 
 ```
 
@@ -440,7 +447,7 @@ library (plotly)
 library (ggplot2)
 library(readxl)
 
-freq_94_23 <- read_excel("C:\\R\\data\\freq_94_23.xlsx")
+freq_94_23 <- read_excel("freq_94_23.xlsx")
 
 Station_Name <- factor (freq_94_23$STATION_NAME, levels = c("A1", "A2M", "A3", "A4", "H-A3", "H-B", "A5", "H-C1", "H-C", "B1S", "B2", "B3", "B4", "01", "02", "C1", "03", "04", "05", "C2", "06", "07", "08", "D3", "10", "09", "E1", "14", "15", "12", "13", "16", "F2", "F3", "18", "19", "20", "22", "21", "H2", "23", "H4", "H6", "25", "26", "27", "28", "29", "30", "31", "I2", "33", "J2", "K2", "M3"))
 
@@ -470,6 +477,11 @@ plotly:: ggplotly(percent_plot, tooltip = c("label1", "label2"))
 
 ## **Data Downloads**
 
+Data from all CTDEEP cruises can be downloaded from the [UCONN
+ERDDAP](http://merlin.dms.uconn.edu:8080/erddap/tabledap/DEEP_WQ.html). All
+samples are collected and analyzed under EPA-approved Quality Assurance Project
+Plans.
+
 *Click these buttons to download the data utilized in the visualizations produced for the 2023 Hypoxia Season Quick Facts.* 
 
 
@@ -481,7 +493,7 @@ plotly:: ggplotly(percent_plot, tooltip = c("label1", "label2"))
 library(downloadthis)
 library(readxl)
 
-dt <- read_excel("C:\\R\\Data\\CruiseInfoTable2023.xlsx")
+dt <- read_excel("CruiseInfoTable2023.xlsx")
 
 list(dt) %>%
     download_this(
@@ -498,7 +510,7 @@ list(dt) %>%
 <brk>
 <brk>
 ```{r}
-MovAvg  <- read_excel("C:\\R\\data\\MovingAverage2023.xlsx")
+MovAvg  <- read_excel("MovingAverage2023.xlsx")
 
 list(MovAvg) %>%
   download_this(
@@ -515,7 +527,7 @@ list(MovAvg) %>%
 <brk>
 ```{r}
 
-TimDur  <- read_excel("C:\\R\\data\\timing and duration.xlsx")
+TimDur  <- read_excel("timing and duration.xlsx")
 list(TimDur) %>%
   download_this(
     output_name = "Timing and Duration of Hypoxia in LIS dataset",
@@ -531,7 +543,7 @@ list(TimDur) %>%
 <brk>
 ```{r}
 
-HypoxicVol <- read_excel("C:\\R\\data\\Hypoxic Volume.xlsx")
+HypoxicVol <- read_excel("Hypoxic Volume.xlsx")
 list(HypoxicVol) %>%
   download_this(
     output_name = "Volume of LIS Bottom Waters Below 3 mg/L dataset",
@@ -547,7 +559,7 @@ list(HypoxicVol) %>%
 <brk>
 ```{r}
 
-dt1 <- read_excel("C:\\R\\Data\\2023_hypoxAreaVol.xlsx")
+dt1 <- read_excel("2023_hypoxAreaVol.xlsx")
 list(dt1) %>%
   download_this(
     output_name = "2023 Long Island Sound Hypoxia Season Volume dataset",
@@ -562,7 +574,7 @@ list(dt1) %>%
 <brk>
 ```{r}
 
-freq_94_23 <- read_excel("C:\\R\\data\\freq_94_23.xlsx")
+freq_94_23 <- read_excel("freq_94_23.xlsx")
 list(freq_94_23) %>%
   download_this(
     output_name = "Frequency of Hypoxia dataset",
