@@ -99,7 +99,7 @@ During the summer of 2023, CT DEEP conducted seven surveys across LIS between Ma
 <!-- samples are collected and analyzed under EPA-approved Quality Assurance Project -->
 <!-- Plans. -->
 
-
+<div class = 'itable'>
 ```{r, tab.cap = '<i> Summary of sampling events during the 2023 Hypoxia Season</i>'}
 
 install.packages("kbleExtra")
@@ -116,6 +116,8 @@ dt %>%
   scroll_box(height="300px") 
   
 ```
+</div>
+
 <hr>
 ## **Weather Summary**
 <hr>
@@ -207,9 +209,8 @@ Precip_rank %>%
             "Sep", "Aug", "Jul", "Jun", "May", "Apr","Mar", "Feb", "Jan")) %>%
 ggplot(aes(x=month, y=Rank_Nth_driest, fill=group)) + 
   geom_bar(stat="identity", width= 0.7, position=position_dodge(width=0.8))+
-labs(title =("Monthly Precipitation Rankings in Connecticut"), 
-        subtitle= "2022 vs 2023", 
-        y= "Rank Nth driest", 
+labs(title =("2022 & 2023 Monthly Precipitation Rankings in Connecticut"), 
+        y= "Rank Nth Driest on Record", 
         x= "Month") +
             theme(legend.position = "bottom", 
             legend.title=element_blank(),
@@ -235,26 +236,24 @@ coord_flip()
 
 CTDEEP utilizes Geographic Information System (GIS) software to create interpolations of bottom water dissolved oxygen concentrations across LIS and estimate the area effected by hypoxia on a cruise by cruise basis. Changes in the maximum hypoxic area over the LISS sampling period of record can be see in this [**video**](https://youtu.be/cl7MmCm8Kao?list=PLN8TZ_MzsZN_RhkPBddClSNZz74MDdr2b).
 
-**In 2023, the maximum area of Long Island Sound with bottom water dissolved oxygen (DO) concentrations below 3.0 mg/L was 126.8 sq. mi (328.4 sq. km) and occurred during the WQAUG23 survey conducted 31 July - 3 August 2023.** During this survey four stations had DO concentrations below 2 mg/L, eight stations had concentrations below 3.0 mg/L, and 10 stations had concentrations between 3 and 3.5 mg/L. The lowest dissolved oxygen concentration recorded during the survey was 1.69 mg/L at Station A4.
+**In 2023, the maximum area of Long Island Sound with bottom water dissolved oxygen (DO) concentrations below 3.0 mg/L was 126.8 sq. mi (328.4 sq. km) and occurred during the WQAUG23 survey conducted 31 July - 3 August 2023**(Figure 3). During this survey four stations had DO concentrations below 2 mg/L, eight stations had concentrations below 3.0 mg/L, and 10 stations had concentrations between 3 and 3.5 mg/L. The lowest dissolved oxygen concentration recorded during the survey was 1.69 mg/L at Station A4.
 
 
 
-```{r, echo=FALSE, out.width="90%", fig.align = 'center'}
+```{r, echo=FALSE, out.width="90%", fig.align = 'center', fig.cap = '<i> LIS Dissolved Oxygen concentrations recorded during August 2023 survey</i>'}
 
 knitr::include_graphics("WQAUG23_DO_MAP.jpg")
 
 
 
 ```
-<brk>
-The LISS utilizes a five-year rolling average to determine progress towards meeting the management target of reducing the area of LIS bottom water exhibiting hypoxic conditions. In assessing trends, LISS uses the five-year rolling average, instead of from year to year, because conditions in any given year could be impacted by variable factors, such as extreme changes in heat or precipitation, which average out over time.The years  1987-1999  are used as a benchmark (or the baseline) because they represent the beginning of Long Island Sound Study’s water quality monitoring program, prior to the Total Maximum Daily Load (TMDL) agreement in 2000 to reduce nitrogen loads into the Sound. Read more about the [hypoxia extent ecosystem target](https://longislandsoundstudy.net/ecosystem-target-indicators/lis-hypoxia/) established by the LISS.
+<br>
 
-This interactive graph shows the maximum area of hypoxia in square miles (blue bars), duration of hypoxic conditions in days (black circles), and the five-year rolling average area in square miles (green line).
-<br>
-<br>
-<br>
-<center>
-```{r}
+The LISS utilizes a five-year rolling average to determine progress towards meeting the management target of reducing the area of LIS bottom water exhibiting hypoxic conditions. The five-year rolling average is used to assess trends because conditions in any given year could be impacted by variable factors, such as extreme weather conditions.  The years  1987-1999  are used as a baseline because they represent the beginning of LISS's water quality monitoring program prior to the LIS Total Maximum Daily Load (TMDL) developed in 2000 targeting a reduction in nitrogen loads to LIS. Read more about the [hypoxia extent ecosystem target](https://longislandsoundstudy.net/ecosystem-target-indicators/lis-hypoxia/) established by the LISS.
+
+
+<div class = 'iplot'>
+```{r, fig.cap = '<i>This interactive graph shows the maximum area of hypoxia in square miles (blue bars), duration of hypoxic conditions in days (black circles), and the five-year rolling average area in square miles (green line). Area in square miles, Duration in days </i>'}
 ##install.packages("png")
 
 library(ggplot2)
@@ -280,22 +279,22 @@ Avg_plot2<-Avg_plot+ annotation_raster(logo, ymin = 350,ymax= 400,xmin = 2005,xm
 ggplotly(Avg_plot2)
 
 ```
-Area in square miles, Duration in days
-<center/>
+</div>
 
 
 
-
+<hr>
 ## **Duration**
+<hr>
 The duration of hypoxia refers to the estimated length of time that hypoxic conditions persist in the bottom waters of Long Island Sound. Duration is estimated based on dissolved oxygen concentration readings taken at three water quality monitoring stations in the Western Sound - A3, A4, and B3.
 
-**The 2023 hypoxic event lasted an estimated 42 days, beginning on July 12, 2023 and ending on August 22, 2023.** 
+**The 2023 hypoxic event lasted an estimated 42 days, beginning on July 12, 2023 and ending on August 22, 2023** (Figure 5). 
 
 The earliest onset of hypoxia (based on CT DEEP data only) occurred on June 25, 2002 and the latest end date was September 20, 2005. The average duration over the 33-year time series is 52 days. The longest hypoxic event was 79 days during 2008. The shortest hypoxic event was 26 days in 2017. 
 
 
-
-```{r}
+<div class = 'iplot'>
+```{r, fig.cap = '<i>Timing and Duration of Hypoxia in Long Island Sound 1991 - 2023 based on DEEP survey results.</i>'}
 library(ggplot2)
 library (readxl)
 library (plotly)
@@ -325,10 +324,9 @@ theme(panel.grid = element_blank())
   
   ggplotly(Dur_plot, tooltip = c("Day.count"), fig.align='center')
 ```
-<br>
-<br>
+</div>
 
-This table displays the onset, duration, and end of the hypoxic events from 1991 through 2023 based on CT DEEP data only. Using the LISS dissolved oxygen standard of 3.0 mg/L, the average date of onset was July 12 (+9 days), the average end date was September 3 (+11 days), and the average duration was 52 days (+13 days).  
+Table 2 displays the onset, duration, and end of the hypoxic events from 1991 through 2023 based on CT DEEP data only. Using the LISS dissolved oxygen standard of 3.0 mg/L, the average date of onset was July 12 (+9 days), the average end date was September 3 (+11 days), and the average duration was 52 days (+13 days).  
 
 The earliest onset of hypoxia occurred on June 25, 2002, and the latest end date occurred on September 20, 2005.  
 
@@ -336,6 +334,7 @@ The maximum area of hypoxia was 393 square miles and occurred in 1994. The longe
 
 In 2014, 2016, 2017, 2018, and 2020 there were clear periods where the DO concentration rose above the 3.0 mg/L threshold in the early/middle part of August before dipping again during late August and early September. 
 
+<div class = 'itable'>
 ```{r}
 
 library (readxl)
@@ -350,14 +349,12 @@ dt %>%
   scroll_box(height="300px") 
   
 ```
+</div>
 
-
-<br>
-<br>
 The University of Connecticut Long Island Sound Integrated Coastal Observing System (LISICOS) utilized continuously collected dissolved oxygen data from the Execution Rocks buoy to estimate there were 42.30 days with concentrations below or equal to 3.0 mg/L. There were 28.69 days with DO concentrations less than or equal to 2.0 mg/L and 11.01 days with concentrations below or equal to 1.0 mg/L. The lowest DO concentration recorded by the buoy was 0.08 mg/L on July 8. 
 
 
-```{r, echo=FALSE, out.width="90%", fig.align = 'center'}
+```{r, echo=FALSE, out.width="90%", fig.align = 'center', fig.cap = '<i>Execution Rocks LISICOS Buoy Continuous DO Data June 2023 - October 2023</i>'}
 
 
 knitr::include_graphics("exrx_clim_2023.jpg")
@@ -366,13 +363,17 @@ knitr::include_graphics("exrx_clim_2023.jpg")
 
 
 
-
+<hr>
 ## **Hypoxic Volume**
-Hypoxic Volume is a measure of the vertical extent (thickness) of hypoxia and is important from an ecological perspective for fish and crustaceans that move throughout the water column. 
+<hr>
 
-In 2019, CT DEEP and the O'Donnell lab at the University of Connecticut Marine Sciences Department undertook a project to develop a [*tool*](http://merlin.dms.uconn.edu:9988/webapps/home/) to calculate the hypoxic volume of Long Island Sound. The tool is available to the public and allows users to obtain area and volume estimates on the fly from any survey from 1991-present. The tool utilizes CT DEEP and IEC data. (NOTE: Area estimates from the tool will differ slightly from CTDEEP estimates due to slight differences in methodology.)
+Hypoxic Volume is a measure of the vertical extent or thickness of hypoxia.  Hypoxic volume is an important measure for aquatic life uses because fish and crustaceans move throughout the water column. 
 
-**The maximum volume of water with concentrations below 3.0 mg/L occurred during the HYAUG23 survey and was 1.2 km3 (0.29 mi3).** The table compares hypoxic area and volume by survey over the 2023 season. 
+In 2019, CT DEEP and the O'Donnell lab at the University of Connecticut Marine Sciences Department undertook a project to develop a [*tool*](http://merlin.dms.uconn.edu:9988/webapps/home/) to calculate the hypoxic volume of Long Island Sound. The tool is available to the public and allows users to obtain area and volume estimates on the fly from any survey from 1991-present. The tool utilizes CT DEEP and IEC data.
+
+**The maximum volume of water with concentrations below 3.0 mg/L occurred during the HYAUG23 survey and was 1.2 km3 (0.29 mi3).** Table 3 compares hypoxic area and volume by survey over the 2023 season. 
+
+<div class = 'itable'>
 ```{r, echo=FALSE, out.width="75%", fig.align = 'left'}
 
 install.packages("kbleExtra")
@@ -390,14 +391,11 @@ dt1 %>%
 
 
 ```
-<brk>
-The interactive graph plots the maximum hypoxic volume over time. Initial analyses show "strong evidence that the hypoxic volume in LIS is substantially smaller between 2015 and 2019 than 20 years earlier" (O'Donnell, et al., 2020).
-
-<brk>
-<brk>
+</div>
 
 
-```{r, echo=FALSE, out.width="90%", fig.align = 'center'}
+
+```{r, echo=FALSE, out.width="90%", fig.align = 'center', fig.cap = "<i>The interactive graph plots the maximum hypoxic volume over time. Initial analyses shows strong evidence that the hypoxic volume in LIS is substantially smaller between 2015 and 2019 than 20 years earlier (O'Donnell, et al., 2020).</i>"}
 pacman::p_load(
   rio,       # import/export
   here,      # filepaths
@@ -422,23 +420,22 @@ Vol_plot %>% plotly::ggplotly(fig.align='center')
 
 
 ```
-*O'Donnell, J., Fake, T., and J. O'Donnell. 2020. Computing the Hypoxic Volume of Long Island Sound- Final Report, September 12, 2020. University of Connecticut, Department of Marine Sciences, Groton, CT. Prepared for the Connecticut Department of Energy and Environmental Protection and the Long Island Sound Study*
 
-
-
+<hr>
 ## **Frequency of Hypoxia**
+<hr>
 This map illustrates how frequently the areas of Long Island Sound experience hypoxia. The colors represent the percentage of years in which hypoxic conditions have occurred in the bottom waters of Long Island Sound. The westernmost areas have experienced hypoxia almost every year since monitoring began. 
 
 The bar graph provides a deeper dive into the data (percentages) used to create the frequency map. The colors of the bars correspond to the map legend. 
 
-```{r, echo=FALSE, out.width="90%", fig.align = 'center'}
+```{r, echo=FALSE, out.width="90%", fig.align = 'center', fig.cap = '<i>The frequency of hypoxia in Long Island Sound Bottom Waters from 1994 - 2023</i>'}
 
 knitr::include_graphics("frequency_IEC_DEEP_2023.jpg")
 
 ```
 
-
-```{r, echo=FALSE, out.width="125%", fig.align = 'center'}
+<div class = 'iplot'>
+```{r, echo=FALSE, out.width="125%", fig.align = 'center', fig.cap = '<i>The percentage of time a station has been hypoxic over the period of survey record </i>'}
 
 install.packages("viridis")
 install.packages("RTools")
@@ -472,17 +469,18 @@ plotly:: ggplotly(percent_plot, tooltip = c("label1", "label2"))
 
 
 ```
-<br>
-<br>
+</div>
 
+<hr>
 ## **Data Downloads**
+<hr>
 
 Data from all CTDEEP cruises can be downloaded from the [UCONN
-ERDDAP](http://merlin.dms.uconn.edu:8080/erddap/tabledap/DEEP_WQ.html). All
+ERDDAP](http://merlin.dms.uconn.edu:8080/erddap/tabledap/DEEP_WQ.html) and through the Water Quality Portal (Link to come soon). All
 samples are collected and analyzed under EPA-approved Quality Assurance Project
 Plans.
 
-*Click these buttons to download the data utilized in the visualizations produced for the 2023 Hypoxia Season Quick Facts.* 
+*In addition click the button below to download data utilized in the visualizations produced for the 2023 Hypoxia Season Summary.* 
 
 
 ```{r}
@@ -585,15 +583,12 @@ list(freq_94_23) %>%
     icon = "fa fa-save", 
     self_contained = TRUE)
 ```
-<brk>
-<brk>
-<br>
-<br>
-<br>
 
+<hr>
 ## **Contact Information**
+<hr>
 
-For more information on the Long Island Sound Water Quality Monitoring Program visit:
+**For more information on the Long Island Sound Water Quality Monitoring Program visit:**
 
 [**CTDEEP LISWQMP**](https://portal.ct.gov/DEEP/Water/LIS-Monitoring/LIS-Water-Quality-and-Hypoxia-Monitoring-Program-Overview)  
 
@@ -603,33 +598,19 @@ For more information on the Long Island Sound Water Quality Monitoring Program v
 
 [**LISICOS**](https://lisicos.uconn.edu/index.php)
 
-**Or contact us:**<br>
-Matt Lyman, CT DEEP<br>
-Lead Scientist, Database Manager<br>
-[matthew.lyman@ct.gov](matthew.lyman@ct.gov)<br>
-(860) 424-3158<br>
-<br>
+**Report Prepared by:** <br>
 Katie O'Brien-Clayton, CT DEEP <br>
-Field Operations, Quality Assurance <br>
 [katie.obrien-clayton@ct.gov](katie.obrien-clayton@ct.gov)<br>
-(860) 424-3176 <br>
-<br>
-Mary Becker, CT DEEP<br>
-Monitoring Program Supervisor <br>
-[Mary.becker@ct.gov](mary.becker@cy.gov)<br>
-(860) 424-3262 <br>
-<br>
-Mailing address: <br>
-Connecticut Department of Energy and Environmental Protection<br>
-Bureau of Water Protection and Land Reuse <br>
-Planning and Management Division <br>
-79 Elm Street <br>
-Hartford, CT 06106
-<br>
-<br>
-Acknowledgements:<br>
-Cover photo: Rachel Ranelli, 2023 LIS Seasonal Resources Assistant
+
+
+**Acknowledgements:**<br>
+Cover photo: Rachel Ranelli, 2023 LIS Seasonal Resources Assistant<br>
 This Project was funded by the United States Environmental Protection Agency, Long Island Sound Study through grant funds administered by CTDEEP.  
 
+<hr>
+## **References**
+<hr>
 
+*O'Donnell, J., Fake, T., and J. O'Donnell. 2020. Computing the Hypoxic Volume of Long Island Sound- Final Report, September 12, 2020. University of Connecticut, Department of Marine Sciences, Groton, CT. Prepared for the Connecticut Department of Energy and Environmental Protection and the Long Island Sound Study*
 
+GO THROUGH REPORT AND ADD IN OTHER REFERENCES
