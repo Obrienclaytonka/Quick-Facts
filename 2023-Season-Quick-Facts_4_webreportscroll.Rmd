@@ -36,7 +36,7 @@ Hypoxia is a condition in which of low or depleted dissolved oxygen concentratio
 
 Dissolved oxygen (DO) levels below 3.0 mg/L are considered hypoxic in LIS.  Hypoxic conditions causes impairment and in some cases, death to aquatic life. Some studies have found DO can become limiting below 4.8 mg/L for sensitive fish species, while more tolerant species are not affected until DO falls below 2.0 mg/L (Simpson et al 1995,1996).  
 
-Since 1991, [CT DEEP](https://portal.ct.gov/DEEP/Water/LIS-Monitoring/LIS-Water-Quality-and-Hypoxia-Monitoring-Program-Overview) and the [Interstate Environmental Commission (IEC)](https://www.iec-nynjct.org/programs/water/sound-monitoring) have conducted an intensive water quality monitoring program on LIS. The program is funded through a grant from the U.S. Environmental Protection Agency's (EPA) [Long Island Sound Study](https://longislandsoundstudy.net/). Data from the surveys are used to quantify and identify annual trends and differences in water quality parameters relevant to hypoxia, in particular nutrients, temperature, and chlorophyll. These data are also used to evaluate the effectiveness of the LIS management programs efforts to reduce anthropogenic nitrogen inputs, since nitrogen is a primary contributor to the excessive algae growth that leads to hypoxia in LIS. 
+Since 1991, the [Connecticut Department of Energy and Environmental Protection (CT DEEP)](https://portal.ct.gov/DEEP/Water/LIS-Monitoring/LIS-Water-Quality-and-Hypoxia-Monitoring-Program-Overview) and the [Interstate Environmental Commission (IEC)](https://www.iec-nynjct.org/programs/water/sound-monitoring) have conducted an intensive water quality monitoring program on LIS. The program is funded through a grant from the U.S. Environmental Protection Agency's (EPA) [Long Island Sound Study](https://longislandsoundstudy.net/). Data from the surveys are used to quantify and identify annual trends and differences in water quality parameters relevant to hypoxia, in particular nutrients, temperature, and chlorophyll. These data are also used to evaluate the effectiveness of the LIS management programs efforts to reduce anthropogenic nitrogen inputs, since nitrogen is a primary contributor to the excessive algae growth that leads to hypoxia in LIS. 
 
 During the summer (June - September), surveys across LIS (Figure 1) are conducted at bi-weekly intervals to better define the areal extent and duration of hypoxia. During these surveys stations are sampled for in-situ parameters including dissolved oxygen, temperature, pH, and salinity. 
 
@@ -234,7 +234,7 @@ coord_flip()
 ## **Maximum Hypoxic Area**
 <hr>
 
-CTDEEP utilizes Geographic Information System (GIS) software to create interpolations of bottom water dissolved oxygen concentrations across LIS and estimate the area effected by hypoxia on a cruise by cruise basis. Changes in the maximum hypoxic area over the LISS sampling period of record can be see in this [**video**](https://youtu.be/cl7MmCm8Kao?list=PLN8TZ_MzsZN_RhkPBddClSNZz74MDdr2b).
+CT DEEP utilizes Geographic Information System (GIS) software to create interpolations of bottom water dissolved oxygen concentrations across LIS and estimate the area effected by hypoxia on a cruise by cruise basis. Changes in the maximum hypoxic area over the LISS sampling period of record can be see in this [**video**](https://youtu.be/cl7MmCm8Kao?list=PLN8TZ_MzsZN_RhkPBddClSNZz74MDdr2b).
 
 **In 2023, the maximum area of Long Island Sound with bottom water dissolved oxygen (DO) concentrations below 3.0 mg/L was 126.8 sq. mi (328.4 sq. km) and occurred during the WQAUG23 survey conducted 31 July - 3 August 2023**(Figure 3). During this survey four stations had DO concentrations below 2 mg/L, eight stations had concentrations below 3.0 mg/L, and 10 stations had concentrations between 3 and 3.5 mg/L. The lowest dissolved oxygen concentration recorded during the survey was 1.69 mg/L at Station A4.
 
@@ -475,7 +475,7 @@ plotly:: ggplotly(percent_plot, tooltip = c("label1", "label2"))
 ## **Data Downloads**
 <hr>
 
-Data from all CTDEEP cruises can be downloaded from the [UCONN
+Data from all CT DEEP cruises can be downloaded from the [UCONN
 ERDDAP](http://merlin.dms.uconn.edu:8080/erddap/tabledap/DEEP_WQ.html) and through the Water Quality Portal (Link to come soon). All
 samples are collected and analyzed under EPA-approved Quality Assurance Project
 Plans.
@@ -590,11 +590,17 @@ list(freq_94_23) %>%
 
 **For more information on the Long Island Sound Water Quality Monitoring Program visit:**
 
-[**CTDEEP LISWQMP**](https://portal.ct.gov/DEEP/Water/LIS-Monitoring/LIS-Water-Quality-and-Hypoxia-Monitoring-Program-Overview)  
+<a href="https://portal.ct.gov/DEEP/Water/LIS-Monitoring/LIS-Water-Quality-and-Hypoxia-Monitoring-Program-Overview"><img src = "https://portal.ct.gov/-/media/DEEP/about/DEEP-Circle-Logo.png"  alt = "CT DEEP Logo" width="100" height="100"></a>
 
-[**Interstate Environmental Commision**](https://www.iec-nynjct.org/programs/water/sound-monitoring)
+<!-- [**CT DEEP LIS Monitoring Program**](https://portal.ct.gov/DEEP/Water/LIS-Monitoring/LIS-Water-Quality-and-Hypoxia-Monitoring-Program-Overview)   -->
 
-[**Long Island Sound Study**](https://longislandsoundstudy.net/)
+<a href="https://www.iec-nynjct.org/programs/water/sound-monitoring"><img src = "https://www.iec-nynjct.org/sites/default/files/IEClogo.png"  alt = "IEC Logo" width="188" height="100"></a> 
+
+<!-- [**Interstate Environmental Commision**](https://www.iec-nynjct.org/programs/water/sound-monitoring) -->
+
+<a href="https://longislandsoundstudy.net/"><img src = "liss-logo.png"  alt = "LISS Logo" width="110" height="100"></a>
+
+<!-- [**Long Island Sound Study**](https://longislandsoundstudy.net/) -->
 
 [**LISICOS**](https://lisicos.uconn.edu/index.php)
 
@@ -605,7 +611,7 @@ Katie O'Brien-Clayton, CT DEEP <br>
 
 **Acknowledgements:**<br>
 Cover photo: Rachel Ranelli, 2023 LIS Seasonal Resources Assistant<br>
-This Project was funded by the United States Environmental Protection Agency, Long Island Sound Study through grant funds administered by CTDEEP.  
+This Project was funded by the United States Environmental Protection Agency, Long Island Sound Study through grant funds administered by CT DEEP.  
 
 <hr>
 ## **References**
