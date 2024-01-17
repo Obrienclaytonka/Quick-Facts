@@ -236,7 +236,7 @@ coord_flip()
 ## **Maximum Hypoxic Area**
 <hr>
 
-CT DEEP utilizes Geographic Information System (GIS) software to create interpolations of bottom water dissolved oxygen concentrations across LIS and estimate the area effected by hypoxia on a cruise by cruise basis. Changes in the maximum hypoxic area over the LISS sampling period of record can be seen in this [video](https://youtu.be/cl7MmCm8Kao?list=PLN8TZ_MzsZN_RhkPBddClSNZz74MDdr2b). 2023 CT DEEP dissolved oxygen maps are available on the [DEEP Monitoring Maps webpage](https://portal.ct.gov/DEEP/Water/LIS-Monitoring/LIS-Water-Quality-Monitoring-Maps). Maps created by the IEC for the far Western Sound 2023 season can be seen in this [video](images/IEC WLIS Summer 2023 Bottom DO Animation.mp4). 
+CT DEEP utilizes Geographic Information System (GIS) software to create interpolations of bottom water dissolved oxygen concentrations across LIS and estimate the area effected by hypoxia on a cruise by cruise basis. Changes in the maximum hypoxic area over the LISS sampling period of record can be seen in this [video](https://youtu.be/cl7MmCm8Kao?list=PLN8TZ_MzsZN_RhkPBddClSNZz74MDdr2b). 2023 CT DEEP dissolved oxygen maps are available on the [DEEP Monitoring Maps webpage](https://portal.ct.gov/DEEP/Water/LIS-Monitoring/LIS-Water-Quality-Monitoring-Maps). Maps created by the IEC for the far Western Sound 2023 season can be seen in this [video](https://www.iec-nynjct.org/blog/western-long-island-sound-hypoxia-summer-2023-time-lapse-videos). 
 
 **In 2023, the maximum area of Long Island Sound with bottom water dissolved oxygen (DO) concentrations below 3.0 mg/L was 126.8 sq. mi (328.4 sq. km) and occurred during the WQAUG23 survey conducted 31 July - 3 August 2023** (Figure 3). During this survey four stations had DO concentrations below 2 mg/L, eight stations had concentrations below 3.0 mg/L, and 10 stations had concentrations between 3 and 3.5 mg/L. The lowest dissolved oxygen concentration recorded during the survey was 1.69 mg/L at Station A4.
 
@@ -481,6 +481,8 @@ Data from all CT DEEP cruises can be downloaded from the [UCONN
 ERDDAP](http://merlin.dms.uconn.edu:8080/erddap/tabledap/DEEP_WQ.html) and through the Water Quality Portal (Link to come soon). All
 samples are collected and analyzed under [EPA-approved Quality Assurance Project
 Plans](https://portal.ct.gov/DEEP/Water/LIS-Monitoring/LIS-Quality-Assurance-Project-Plans).
+
+Data from IEC cruises can be downloaded through the water quality portal (Link coming soon). All IEC samples are collected and analyzed under [EPA-approved Quality Assurance Plans](https://www.iec-nynjct.org/sites/default/files/iec-ambient-monitoring-in-wlis-qapp-version-5.0-final.pdf). 
 
 *In addition click the buttons below to download data utilized in the visualizations produced for the 2023 Hypoxia Season Summary.* 
 
